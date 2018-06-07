@@ -234,7 +234,10 @@ public class TSocket extends ASocket {
                 if (!isInterrupted()) {
                     HANDLER_LOG.error("Error with " + this.getName(), e);
                     HANDLER_LOG.info("Note: If \"the input ended unexpectedly\" it could mean: \n - tendermint was shut down\n - the protobuf file is not up to date.");
+                    throw new Exception("Error with " + this.getName() + e + "Note: If \"the input ended unexpectedly\" it could mean: \n - tendermint was shut " +
+                            "down\n - the protobuf file is not up to date.");
                 }
+                throw new Exception("Socket died cause: " + e);
             }
             HANDLER_LOG.debug("Stopping Thread " + this.getName());
             Thread.currentThread().interrupt();
