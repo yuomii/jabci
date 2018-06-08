@@ -78,84 +78,84 @@ public abstract class ASocket {
     private List<Object> _listeners = new ArrayList<>();
 
     protected GeneratedMessageV3 handleRequest(Request request) throws IOException {
-        HANDLER_LOG.debug(Integer.toString(request.getValueCase().getNumber()));
-        switch (request.getValueCase()) {
-        case ECHO: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.ECHO);
-            RequestEcho req = request.getEcho();
-            ResponseEcho response = getListenerForType(IEcho.class).requestEcho(req);
-            if (response != null)
-                return (Response.newBuilder().setEcho(response).build());
-            break;
-        }
-        case FLUSH: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.FLUSH);
-            RequestFlush req = request.getFlush();
-            ResponseFlush response = getListenerForType(IFlush.class).requestFlush(req);
-            return (Response.newBuilder().setFlush(response).build());
-        }
-        case INFO: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.INFO);
-            RequestInfo req = request.getInfo();
-            ResponseInfo response = getListenerForType(IInfo.class).requestInfo(req);
-            return (Response.newBuilder().setInfo(response).build());
-        }
-        case SET_OPTION: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.SET_OPTION);
-            RequestSetOption req = request.getSetOption();
-            ResponseSetOption response = getListenerForType(ISetOption.class).requestSetOption(req);
-            return (Response.newBuilder().setSetOption(response).build());
-        }
-        case DELIVER_TX: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.DELIVER_TX);
-            RequestDeliverTx req = request.getDeliverTx();
-            ResponseDeliverTx response = getListenerForType(IDeliverTx.class).receivedDeliverTx(req);
-            return (Response.newBuilder().setDeliverTx(response).build());
-        }
-        case CHECK_TX: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.CHECK_TX);
-            RequestCheckTx req = request.getCheckTx();
-            ResponseCheckTx response = getListenerForType(ICheckTx.class).requestCheckTx(req);
-            return (Response.newBuilder().setCheckTx(response).build());
-        }
-        case COMMIT: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.COMMIT);
-            RequestCommit req = request.getCommit();
-            ResponseCommit response = getListenerForType(ICommit.class).requestCommit(req);
-            return (Response.newBuilder().setCommit(response).build());
-        }
-        case QUERY: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.QUERY);
-            RequestQuery req = request.getQuery();
-            ResponseQuery response = getListenerForType(IQuery.class).requestQuery(req);
-            return (Response.newBuilder().setQuery(response).build());
-        }
-        case INIT_CHAIN: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.INIT_CHAIN);
-            RequestInitChain req = request.getInitChain();
-            ResponseInitChain response = getListenerForType(IInitChain.class).requestInitChain(req);
-            return (Response.newBuilder().setInitChain(response).build());
-        }
-        case BEGIN_BLOCK: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.BEGIN_BLOCK);
-            RequestBeginBlock req = request.getBeginBlock();
-            ResponseBeginBlock response = getListenerForType(IBeginBlock.class).requestBeginBlock(req);
-            return Response.newBuilder().setBeginBlock(response).build();
-        }
-        case END_BLOCK: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.END_BLOCK);
-            RequestEndBlock req = request.getEndBlock();
-            ResponseEndBlock response = getListenerForType(IEndBlock.class).requestEndBlock(req);
-            return (Response.newBuilder().setEndBlock(response).build());
-        }
-        case VALUE_NOT_SET: {
-            HANDLER_LOG.debug("Received " + Request.ValueCase.VALUE_NOT_SET);
+        if(request.getValueCase().getNumber() != 0) {
+            switch (request.getValueCase()) {
+                case ECHO: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.ECHO);
+                    RequestEcho req = request.getEcho();
+                    ResponseEcho response = getListenerForType(IEcho.class).requestEcho(req);
+                    if (response != null) return (Response.newBuilder().setEcho(response).build());
+                    break;
+                }
+                case FLUSH: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.FLUSH);
+                    RequestFlush req = request.getFlush();
+                    ResponseFlush response = getListenerForType(IFlush.class).requestFlush(req);
+                    return (Response.newBuilder().setFlush(response).build());
+                }
+                case INFO: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.INFO);
+                    RequestInfo req = request.getInfo();
+                    ResponseInfo response = getListenerForType(IInfo.class).requestInfo(req);
+                    return (Response.newBuilder().setInfo(response).build());
+                }
+                case SET_OPTION: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.SET_OPTION);
+                    RequestSetOption req = request.getSetOption();
+                    ResponseSetOption response = getListenerForType(ISetOption.class).requestSetOption(req);
+                    return (Response.newBuilder().setSetOption(response).build());
+                }
+                case DELIVER_TX: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.DELIVER_TX);
+                    RequestDeliverTx req = request.getDeliverTx();
+                    ResponseDeliverTx response = getListenerForType(IDeliverTx.class).receivedDeliverTx(req);
+                    return (Response.newBuilder().setDeliverTx(response).build());
+                }
+                case CHECK_TX: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.CHECK_TX);
+                    RequestCheckTx req = request.getCheckTx();
+                    ResponseCheckTx response = getListenerForType(ICheckTx.class).requestCheckTx(req);
+                    return (Response.newBuilder().setCheckTx(response).build());
+                }
+                case COMMIT: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.COMMIT);
+                    RequestCommit req = request.getCommit();
+                    ResponseCommit response = getListenerForType(ICommit.class).requestCommit(req);
+                    return (Response.newBuilder().setCommit(response).build());
+                }
+                case QUERY: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.QUERY);
+                    RequestQuery req = request.getQuery();
+                    ResponseQuery response = getListenerForType(IQuery.class).requestQuery(req);
+                    return (Response.newBuilder().setQuery(response).build());
+                }
+                case INIT_CHAIN: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.INIT_CHAIN);
+                    RequestInitChain req = request.getInitChain();
+                    ResponseInitChain response = getListenerForType(IInitChain.class).requestInitChain(req);
+                    return (Response.newBuilder().setInitChain(response).build());
+                }
+                case BEGIN_BLOCK: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.BEGIN_BLOCK);
+                    RequestBeginBlock req = request.getBeginBlock();
+                    ResponseBeginBlock response = getListenerForType(IBeginBlock.class).requestBeginBlock(req);
+                    return Response.newBuilder().setBeginBlock(response).build();
+                }
+                case END_BLOCK: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.END_BLOCK);
+                    RequestEndBlock req = request.getEndBlock();
+                    ResponseEndBlock response = getListenerForType(IEndBlock.class).requestEndBlock(req);
+                    return (Response.newBuilder().setEndBlock(response).build());
+                }
+                case VALUE_NOT_SET: {
+                    HANDLER_LOG.debug("Received " + Request.ValueCase.VALUE_NOT_SET);
+                    return null;
+                }
+                default:
+                    throw new IllegalStateException(String.format("Received unknown ValueCase '%s' in request", request.getValueCase()));
+            }
             return null;
-        }
-        default:
-            throw new IllegalStateException(String.format("Received unknown ValueCase '%s' in request", request.getValueCase()));
-        }
-        return null;
+        } else throw new IOException("ValueCase could not be parsed");
     }
 
     protected ByteBuffer responseToByteBuffer(GeneratedMessageV3 message) {
