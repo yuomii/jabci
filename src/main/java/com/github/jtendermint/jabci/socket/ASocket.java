@@ -78,7 +78,7 @@ public abstract class ASocket {
     private List<Object> _listeners = new ArrayList<>();
 
     protected GeneratedMessageV3 handleRequest(Request request) throws IOException {
-        HANDLER_LOG.debug(request.getUnknownFields().asMap().toString());
+        HANDLER_LOG.debug(Integer.toString(request.getValueCase().getNumber()));
         switch (request.getValueCase()) {
         case ECHO: {
             HANDLER_LOG.debug("Received " + Request.ValueCase.ECHO);
